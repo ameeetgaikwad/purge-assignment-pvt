@@ -36,6 +36,7 @@ pub async fn sign_up(
     req: web::Json<SignUpRequest>,
     store: web::Data<Store>,
 ) -> Result<HttpResponse> {
+    println!("sign_up: ");
     match store
         .create_user(CreateUserRequest {
             email: req.username.clone(),
@@ -50,7 +51,8 @@ pub async fn sign_up(
 
             Ok(HttpResponse::Ok().json(response))
         }
-        Err(_) => {
+        Err(e) => {
+            println!("sign_up error: {:?}", e);
             return Ok(HttpResponse::InternalServerError().json(serde_json::json!({
                 "error": "Internal server error"
             })));

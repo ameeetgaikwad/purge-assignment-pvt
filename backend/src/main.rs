@@ -25,7 +25,7 @@ pub struct AuthenticatedUser {
 async fn main() -> std::io::Result<()> {
     // Database connection - in production, use environment variables
     let database_url = String::from(
-        "postgresql://postgres:QYJoNSX0XbSzqu10@db.zeiadaunvxihotiuqtxd.supabase.co:5432/postgres",
+        "postgresql://postgres:GFAuAEStvMvsTQHB@db.zuopvzqlayoueiueechw.supabase.co:5432/postgres",
     );
 
     let pool = PgPoolOptions::new()
@@ -78,7 +78,8 @@ async fn main() -> std::io::Result<()> {
                             .service(swap)
                             .service(send)
                             .service(sol_balance)
-                            .service(token_balance),
+                            .service(token_balance)
+                            .service(get_quote_by_id)
                     ),
             )
     })
